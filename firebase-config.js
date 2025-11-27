@@ -2,17 +2,15 @@
  * Configuração do Firebase
  */
 
-// Configuração do Firebase - SUBSTITUA PELAS SUAS CREDENCIAIS
+// Configuração do Firebase com suas credenciais
 const firebaseConfig = {
-  apiKey: "SUA_API_KEY_AQUI",
-  authDomain: "seu-projeto.firebaseapp.com",
-  projectId: "seu-projeto-id",
-  storageBucket: "seu-projeto.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "sua-app-id"
+  apiKey: "AIzaSyDV2HHOVnYOqJJgubbByYLkUphWOWP_TjM",
+  authDomain: "sim-finance.firebaseapp.com",
+  projectId: "sim-finance",
+  storageBucket: "sim-finance.firebasestorage.app",
+  messagingSenderId: "958885685156",
+  appId: "1:958885685156:web:ccf18c33e78ee864484331"
 };
-
-// IMPORTANTE: Antes de usar, substitua pelas suas configurações do Firebase Console
 
 // Inicializa Firebase
 firebase.initializeApp(firebaseConfig);

@@ -28,5 +28,8 @@ Thumbs.db
 # Arquivos de teste
 teste-firebase.html
 
+# Configurações com credenciais
+firebase-config.js
+
 # Cache
 .cache/
