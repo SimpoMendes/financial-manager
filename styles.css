@@ -128,6 +128,19 @@ body {
     flex: 1;
 }
 
+.month-filter select option,
+.monthly-filter select option {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 0.5rem;
+}
+
+.month-filter select option:hover,
+.monthly-filter select option:hover {
+    background: #334155;
+    color: #ffffff;
+}
+
 .month-filter select:focus {
     outline: none;
     border-color: #6366f1;
@@ -302,6 +315,17 @@ body {
     color: #e2e8f0;
 }
 
+.form-group select option {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 0.5rem;
+}
+
+.form-group select option:hover {
+    background: #334155;
+    color: #ffffff;
+}
+
 .form-group input::placeholder {
     color: #64748b;
 }
@@ -364,6 +388,17 @@ body {
     color: #e2e8f0;
     font-size: 0.8rem;
     min-width: 120px;
+}
+
+.filters select option {
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: 0.5rem;
+}
+
+.filters select option:hover {
+    background: #334155;
+    color: #ffffff;
 }
 
 .filters select:focus {
@@ -491,7 +526,7 @@ body {
 .empty-state {
     text-align: center;
     padding: 1.5rem;
-    color: #64748b;
+    color: #556777;
 }
 
 /* Responsive Design */
@@ -612,6 +647,234 @@ body {
 .transactions-container::-webkit-scrollbar-thumb:hover,
 .categories-container::-webkit-scrollbar-thumb:hover {
     background: rgba(99, 102, 241, 0.7);
+}
+
+/* Monthly Control Styles */
+.monthly-filter {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.monthly-filter label {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.monthly-filter select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+    font-size: 0.8rem;
+    min-width: 140px;
+    flex: 1;
+}
+
+.monthly-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.budget-form {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.budget-form h3 {
+    margin-bottom: 0.75rem;
+    color: #e2e8f0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.monthly-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Investment Styles */
+.investment-form {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.investment-form h3 {
+    margin-bottom: 0.75rem;
+    color: #e2e8f0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.investment-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.investments-list {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1rem;
+}
+
+.investments-list h3 {
+    color: #e2e8f0;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.investments-container {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.investment-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+    border-radius: 6px;
+    margin-bottom: 0.25rem;
+}
+
+.investment-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.investment-info {
+    flex: 1;
+}
+
+.investment-name {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #e2e8f0;
+    font-size: 0.9rem;
+}
+
+.investment-meta {
+    font-size: 0.75rem;
+    color: #94a3b8;
+}
+
+.investment-value {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #10b981;
+    margin-right: 0.75rem;
+}
+
+.investment-charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Backup Section */
+.backup-section {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1rem;
+}
+
+.backup-section h3 {
+    margin-bottom: 0.75rem;
+    color: #e2e8f0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.backup-buttons {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.backup-buttons .btn-primary {
+    flex: 1;
+    min-width: 140px;
+    font-size: 0.8rem;
+    padding: 0.6rem 1rem;
+}
+
+.sync-status {
+    padding: 0.5rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+/* Responsive adjustments for new sections */
+@media (max-width: 768px) {
+    .monthly-filter {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+        padding: 0.75rem;
+    }
+    
+    .monthly-filter select {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .monthly-summary,
+    .investment-summary {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .monthly-charts,
+    .investment-charts {
+        grid-template-columns: 1fr;
+    }
+    
+    .investment-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .investment-value {
+        align-self: flex-end;
+        margin-right: 0;
+    }
 }
 
 /* Animações */

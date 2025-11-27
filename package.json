@@ -1,0 +1,55 @@
+{
+  "name": "gestor-financeiro",
+  "version": "1.0.0",
+  "description": "Sistema completo de gestão financeira",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build-win": "electron-builder --win",
+    "build-mac": "electron-builder --mac",
+    "build-linux": "electron-builder --linux",
+    "dist": "electron-builder --publish=never"
+  },
+  "build": {
+    "appId": "com.gestorfinanceiro.app",
+    "productName": "Gestor Financeiro",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!node_modules",
+      "!dist",
+      "!.git"
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "icon-512.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "icon-512.png"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "icon-512.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "devDependencies": {
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4"
+  },
+  "dependencies": {
+    "electron-updater": "^6.1.4",
+    "firebase": "^12.6.0"
+  },
+  "author": "Seu Nome",
+  "license": "MIT"
+}

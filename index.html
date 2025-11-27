@@ -11,6 +11,11 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Gestor Financeiro">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
 </head>
 <body>
     <header class="header">
@@ -20,6 +25,8 @@
                 <button class="nav-btn active" data-tab="dashboard">Dashboard</button>
                 <button class="nav-btn" data-tab="transactions">Transações</button>
                 <button class="nav-btn" data-tab="categories">Categorias</button>
+                <button class="nav-btn" data-tab="monthly">Controle Mensal</button>
+                <button class="nav-btn" data-tab="investments">Investimentos</button>
             </nav>
         </div>
     </header>
@@ -159,6 +166,159 @@
                 <div class="categories-list">
                     <h3>Categorias Existentes</h3>
                     <div id="categoriesList" class="categories-container"></div>
+                </div>
+
+                <div class="backup-section">
+                    <h3>Backup e Sincronização</h3>
+                    <div class="backup-buttons">
+                        <button class="btn-primary" onclick="financialManager.exportData()">
+                            💾 Exportar Dados
+                        </button>
+                        <button class="btn-primary" onclick="document.getElementById('importFile').click()">
+                            📁 Importar Dados
+                        </button>
+                        <button class="btn-primary" onclick="financialManager.syncData()">
+                            🔄 Sincronizar
+                        </button>
+                        <input type="file" id="importFile" accept=".json" style="display: none;" onchange="financialManager.importData(this.files[0])">
+                    </div>
+                    <div class="sync-status" id="syncStatus">
+                        <span id="connectionStatus">🔴 Verificando conexão...</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Monthly Control Tab -->
+            <section id="monthly" class="tab-content">
+                <div class="monthly-filter">
+                    <label for="monthlyYearFilter">Ano:</label>
+                    <select id="monthlyYearFilter">
+                        <option value="all">Todos os anos</option>
+                    </select>
+                    
+                    <label for="monthlyMonthFilter">Mês:</label>
+                    <select id="monthlyMonthFilter">
+                        <option value="all">Todos os meses</option>
+                    </select>
+                </div>
+
+                <div class="monthly-summary">
+                    <div class="card">
+                        <h3>Meta do Mês</h3>
+                        <p class="amount" id="monthlyBudget">R$ 0,00</p>
+                        <button class="edit-btn" id="editBudgetBtn" onclick="financialManager.editCurrentBudget()" style="margin-top: 0.5rem; font-size: 0.7rem; padding: 0.3rem 0.6rem;">
+                            Editar Meta
+                        </button>
+                    </div>
+                    <div class="card expense">
+                        <h3>Gasto Atual</h3>
+                        <p class="amount" id="monthlySpent">R$ 0,00</p>
+                    </div>
+                    <div class="card">
+                        <h3>Restante</h3>
+                        <p class="amount" id="monthlyRemaining">R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="budget-form">
+                    <h3>Definir Meta Mensal</h3>
+                    <form id="budgetForm">
+                        <div class="form-group">
+                            <label for="budgetMonth">Mês/Ano</label>
+                            <input type="month" id="budgetMonth" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="budgetAmount">Valor da Meta</label>
+                            <input type="number" id="budgetAmount" step="0.01" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Definir Meta</button>
+                    </form>
+                </div>
+
+                <div class="monthly-charts">
+                    <div class="chart-card">
+                        <h3>Gastos por Categoria (Mês)</h3>
+                        <canvas id="monthlyExpenseChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Comparativo Mensal</h3>
+                        <canvas id="monthlyComparisonChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investments Tab -->
+            <section id="investments" class="tab-content">
+                <div class="investment-form">
+                    <h3>Novo Investimento</h3>
+                    <form id="investmentForm">
+                        <div class="form-group">
+                            <label for="investmentName">Nome do Investimento</label>
+                            <input type="text" id="investmentName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="investmentType">Tipo</label>
+                            <select id="investmentType" required>
+                                <option value="">Selecione o tipo</option>
+                                <option value="poupanca">Poupança</option>
+                                <option value="cdb">CDB</option>
+                                <option value="tesouro">Tesouro Direto</option>
+                                <option value="lci">LCI</option>
+                                <option value="lca">LCA</option>
+                                <option value="acoes">Ações</option>
+                                <option value="fundos">Fundos</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="initialAmount">Valor Inicial</label>
+                            <input type="number" id="initialAmount" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="interestRate">Taxa de Juros (% ao ano)</label>
+                            <input type="number" id="interestRate" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="investmentDate">Data do Investimento</label>
+                            <input type="date" id="investmentDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="maturityDate">Data de Vencimento (opcional)</label>
+                            <input type="date" id="maturityDate">
+                        </div>
+                        <button type="submit" class="btn-primary">Adicionar Investimento</button>
+                    </form>
+                </div>
+
+                <div class="investment-summary">
+                    <div class="card">
+                        <h3>Total Investido</h3>
+                        <p class="amount" id="totalInvested">R$ 0,00</p>
+                    </div>
+                    <div class="card income">
+                        <h3>Rendimento Atual</h3>
+                        <p class="amount" id="totalYield">R$ 0,00</p>
+                    </div>
+                    <div class="card">
+                        <h3>Patrimônio Total</h3>
+                        <p class="amount" id="totalPatrimony">R$ 0,00</p>
+                    </div>
+                </div>
+
+                <div class="investments-list">
+                    <h3>Meus Investimentos</h3>
+                    <div id="investmentsList" class="investments-container"></div>
+                </div>
+
+                <div class="investment-charts">
+                    <div class="chart-card">
+                        <h3>Distribuição por Tipo</h3>
+                        <canvas id="investmentTypeChart"></canvas>
+                    </div>
+                    <div class="chart-card">
+                        <h3>Evolução do Patrimônio</h3>
+                        <canvas id="patrimonyEvolutionChart"></canvas>
+                    </div>
                 </div>
             </section>
         </div>

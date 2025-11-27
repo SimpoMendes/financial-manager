@@ -1,6 +1,16 @@
 # 💰 Gestor Financeiro
 
-Sistema completo de gestão financeira com foco em fluxo de caixa e categorização de despesas.
+Sistema completo de gestão financeira com sincronização na nuvem, controle de investimentos e orçamentos mensais.
+
+## 🌟 Funcionalidades Principais
+
+- **💳 Transações**: Cadastro com recorrência automática
+- **📊 Dashboard**: Gráficos interativos e resumos
+- **🎯 Controle Mensal**: Metas e acompanhamento de gastos
+- **📈 Investimentos**: Cálculo automático de rendimentos
+- **☁️ Sincronização**: Dados salvos no Firebase
+- **📱 PWA**: Funciona como app no celular
+- **💻 Executável**: Versões para Windows, macOS e Linux
 
 ## 🚀 Funcionalidades
 
@@ -59,12 +69,55 @@ O sistema é totalmente responsivo e otimizado para:
 - **Persistência**: Dados mantidos entre sessões
 - **Backup Manual**: Dados podem ser exportados via console do navegador
 
+## 🚀 Instalação Rápida
+
+### Opção 1: Usar Diretamente (Recomendado)
+1. **Clone** o repositório
+2. **Configure** o Firebase (veja abaixo)
+3. **Abra** `index.html` no navegador
+4. **Pronto!** Sistema funcionando
+
+### Opção 2: Criar Executável
+```bash
+npm install
+npm run build-win  # Windows
+npm run build-mac  # macOS
+npm run build-linux # Linux
+```
+
+## 🔥 Configuração do Firebase
+
+### 1. Criar Projeto Firebase
+1. Acesse [Firebase Console](https://console.firebase.google.com/)
+2. Crie um novo projeto
+3. Ative **Firestore Database** (modo teste)
+4. Ative **Authentication** → **Anônimo**
+
+### 2. Configurar Credenciais
+1. **Copie** `firebase-config.example.js` para `firebase-config.js`
+2. **Substitua** as credenciais pelas suas do Firebase Console
+3. **Salve** o arquivo
+
+### 3. Regras de Segurança (Firestore)
+```javascript
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+```
+
 ## 🔧 Como Usar
 
-1. **Abrir o Sistema**: Abra o arquivo `index.html` em qualquer navegador moderno
+1. **Configurar Firebase**: Siga as instruções acima
 2. **Criar Categorias**: Vá para a aba "Categorias" e crie suas categorias personalizadas
-3. **Adicionar Transações**: Na aba "Transações", cadastre suas receitas e despesas
-4. **Visualizar Dashboard**: Acompanhe seus dados financeiros na aba "Dashboard"
+3. **Definir Metas**: Na aba "Controle Mensal", defina orçamentos
+4. **Adicionar Transações**: Cadastre receitas e despesas (com recorrência)
+5. **Gerenciar Investimentos**: Acompanhe rendimentos automaticamente
+6. **Visualizar Dashboard**: Gráficos e resumos em tempo real
 
 ## 📋 Estrutura do Projeto
 
