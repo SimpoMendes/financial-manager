@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6366f1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Gestor Financeiro">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -15,32 +15,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-    <script>
-        // Detecta o ambiente de execução
-        const isElectron = typeof require !== 'undefined' && typeof window.process === 'object';
-        const isLocalFile = window.location.protocol === 'file:';
-        const isGitHubPages = window.location.hostname.includes('github.io');
-        
-        console.log('Ambiente detectado:', {
-            isElectron,
-            isLocalFile,
-            isGitHubPages,
-            hostname: window.location.hostname,
-            protocol: window.location.protocol
-        });
-        
-        // Carrega configuração apropriada
-        if (isElectron) {
-            // Executável Electron
-            document.write('<script src="firebase-config-electron.js"><\/script>');
-        } else if (isLocalFile) {
-            // Arquivo local (desenvolvimento)
-            document.write('<script src="firebase-config.js"><\/script>');
-        } else {
-            // GitHub Pages ou servidor web
-            document.write('<script src="firebase-config-public.js"><\/script>');
-        }
-    </script>
+    <script src="firebase-config-public.js"></script>
 </head>
 <body>
     <header class="header">
